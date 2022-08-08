@@ -50,7 +50,7 @@ void Animation_1()
 
         SelectObject(dc, GetStockObject(DC_PEN));
         SetDCBrushColor(dc, RGB(10, 10, 255));
-        sprintf(c, "Ketek Group!");
+        sprintf(c, "Windows Programming!");
         TextOutA(dc, 520, 550, c, strlen(c)+1);
     }while(GetKeyState(VK_ESCAPE) >= 0);
 }
