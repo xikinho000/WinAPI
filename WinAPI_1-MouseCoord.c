@@ -32,7 +32,7 @@ int main()
 
         printf("\nClient Size: %d, %d", rct[0].right, rct[0].bottom);
 
-        printf("\Screen Size: %d, %d", rctScr[0].right, rctScr[0].bottom);
+        printf("\nScreen Size: %d, %d", rctScr[0].right, rctScr[0].bottom);
 
         if( GetKeyState(VK_LBUTTON)>=0 ){
             printf("\nLeft Mouse Button click!\n");
