@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+// override the built in function
+LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    if(message == WM_DESTROY)
+        PostQuitMessage(0); // message to show after windows close
+    else if(message == WM_KEYDOWN)
+        printf("code : %d\n", wParam); // show the ascii code of the key pressed
+    else if(message == WM_CHAR)
+        printf("code : %c\n", wParam); // show the key pressed
+    else if(message == WM_MOUSEMOVE){
+        int xPos = LOWORD(lParam);
+        int yPos = HIWORD(lParam);
+        printf("mouse pos: x=%d, y= %d\n", xPos, yPos);
+    }
+    else if(message == WM_LBUTTONDOWN)
+        printf("\nMouse Left Btn\n");
+    else return DefWindowProcA(hwnd, message, wParam, lParam);
+}
+
+int main()
+{
+    WNDCLASSA wcl; // structure
+    memset(&wcl, 0, sizeof(WNDCLASSA));
+    wcl.lpszClassName = "My Window";
+    wcl.lpfnWndProc = WndProc;
+    RegisterClassA(&wcl);
+
+    HWND hwnd;
+    hwnd = CreateWindow("My Window", "Creating a Window", WS_OVERLAPPEDWINDOW,
+            10, 10, 640, 480, NULL, NULL, NULL, NULL);
+
+    ShowWindow(hwnd, SW_SHOWNORMAL);
+    MSG msg;
+    while(GetMessage(&msg, NULL, 0, 0)){
+        // depends the message got from the queue, if that is a close window or not.
+        TranslateMessage(&msg);
+        // this part closes the program correctly.
+        DispatchMessage(&msg);
+
+    }
+    return 0;
+}
