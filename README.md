@@ -7,3 +7,6 @@ A- Drawing Shapes.
 B- Creating windows.
 B- Showing Texts.
 C- Mouse Coordinates.
+
+Compile with gcc, link gdi32 library
+gcc -o output source_code.c -lgdi32
